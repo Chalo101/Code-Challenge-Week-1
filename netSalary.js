@@ -4,9 +4,10 @@ let salary =  prompt("Enter your gross salary");
 
 //Initializes the variables to 0
 let payeeTax = 0;
-let nhifDeduction = 0;
+let nhifRate = 0;
 let nssfDeduction = 0;
 let netSalary = 0;
+let basicSalary = 0;
 
 //Function to calculate the payee accon=rding to amount of salary
 function calculatePayee(salary){
@@ -30,61 +31,70 @@ function calculatePayee(salary){
 }
 
 //Function to calculate the NHIF rate
-function nhifRate(salary){
-    if(salary <=5999){
-        nhifDeduction = 150;
+function NHIFContributions(basicSalary) {
+    let contribution;
 
-    }else if(salary >=6000 && salary <=7999){
-        nhifDeduction =300;
-
-    }else if(salary >=8000 && salary <=11999){
-        nhifDeduction =400;
-
-    }else if(salary >=12000 && salary <=14999){
-        nhifDeduction =500;
-
-    }else if(salary >=15000 && salary <=19999){
-        nhifDeduction =600;
-
-    }else if(salary >=20000 && salary <=24999){
-        nhifDeduction =750;
-        
-    }else if(salary >=25000 && salary <=29999){
-        nhifDeduction =850;
-
-    }else if(salary >=30000 && salary <=34999){
-        nhifDeduction =900;
-
-    }else if(salary >=35000 && salary <=39999){
-        nhifDeduction =950;
-
-    }else if(salary >=40000 && salary <=44999){
-        nhifDeduction =1000;
-
-    }else if(salary >=45000 && salary <=49999){
-        nhifDeduction =1100;
-
-    }else if(salary >=50000 && salary <=59999){
-        nhifDeduction =1200;
-
-    }else if(salary >=60000 && salary <=69999){
-        nhifDeduction =1300;
-
-    }else if(salary >=70000 && salary <=79999){
-        nhifDeduction =1400;
-
-    }else if(salary >=80000 && salary <=89999){
-        nhifDeduction =1500;
-
-    }else if(salary >=90000 && salary <=99000){
-        nhifDeduction =1600;
-
-    }else if(salary >=100000){
-        nhifDeduction =1700;
+    // A switch statement based on the NHIF contributions Chart 
+    switch (true) {
+      case (basicSalary <= 5999):
+        contribution = 150;
+        break;
+      case (basicSalary >= 6000 && basicSalary <= 7999):
+        contribution = 300;
+        break;
+      case (basicSalary >= 8000 && basicSalary <= 11999):
+        contribution = 400;
+        break;
+      case (basicSalary >= 12000 && basicSalary <= 14999):
+        contribution = 500;
+        break;
+      case (basicSalary >= 15000 && basicSalary <= 19999):
+        contribution = 600;
+        break;
+      case (basicSalary >= 20000 && basicSalary <= 24999):
+        contribution = 750;
+        break;
+      case (basicSalary >= 25000 && basicSalary <= 29999):
+        contribution = 850;
+        break;
+      case (basicSalary >= 30000 && basicSalary <= 34999):
+        contribution = 900;
+        break;
+      case (basicSalary >= 35000 && basicSalary <= 39999):
+        contribution = 950;
+        break;
+      case (basicSalary >= 40000 && basicSalary <= 44999):
+        contribution = 1000;
+        break;
+      case (basicSalary >= 45000 && basicSalary <= 49999):
+        contribution = 1100;
+        break;
+      case (basicSalary >= 50000 && basicSalary <= 59999):
+        contribution = 1200;
+        break;
+      case (basicSalary >= 60000 && basicSalary <= 69999):
+        contribution = 1300;
+        break;
+      case (basicSalary >= 70000 && basicSalary <= 79999):
+        contribution = 1400;
+        break;
+      case (basicSalary >= 80000 && basicSalary <= 89999):
+        contribution = 1500;
+        break;
+      case (basicSalary >= 90000 && basicSalary <= 99999):
+        contribution = 1600;
+        break;
+      case (basicSalary >= 100000):
+        contribution = 1700;
+        break;
+      default:
+        break;
     }
-
-    return nhifDeduction
+  
+    return contribution;
 }
+
+let yourNHIFContributions = NHIFContributions(basicSalary);
 
 //Function to calculate the nssf deduction
 function nssfDeductions(salary){
@@ -98,14 +108,14 @@ function nssfDeductions(salary){
 }
 
 //Calling the functions
-nssfDeductions(salary), calculatePayee(salary), nhifRate(salary)
+nssfDeductions(salary), calculatePayee(salary), NHIFContributions(salary)
 
 //Calculating the net salary
-netSalary = salary - (payeeTax + nhifDeduction + nssfDeduction);
+netSalary = salary - (payeeTax + yourNHIFContributions + nssfDeduction);
 
 // Printing out all the calculations
 console.log ("Gross Salary" + salary)
 console.log ("Payee TAX " + payeeTax)
-console.log (`NHIF Deduction ${nhifDeduction}`)
+console.log (`NHIF Deduction ${NHIFContributions(salary)}`)
 console.log ("NSSF Deduction " + nssfDeduction)
 console.log ("Net Salary " + netSalary)
